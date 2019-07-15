@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-require('./db/mongoose');
+const connectDb = require('./db/mongoose');
 
 const userRoutes = require('./routes/user-router');
 const paymentRoutes = require('./routes/payment-router');
@@ -18,10 +18,10 @@ const apiVersion = "/v1";
 app.use(apiVersion, userRoutes);
 app.use(apiVersion, paymentRoutes);
 
-app.get('/', (req, res) => {
-  res.json({ "tutorial": "Build REST API with node.js" });
+connectDb().then(async () => {
+  app.listen(process.env.PORT, () =>
+    console.log(`Server is running on port: ${port}!`),
+  );
+}).catch(() => {
+  console.log('Failed to connect with database!');
 });
-
-app.listen(port,() =>{
-  console.log('Server is running on port: ', port);
-})

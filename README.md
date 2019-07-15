@@ -6,5 +6,5 @@
 
 ### Update the .env file with correct configurations
 
-### Start the message service app by runnig the comman
+### Start the message service app by runnig the command
 > node app.js
