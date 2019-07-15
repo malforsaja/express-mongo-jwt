@@ -61,11 +61,16 @@ router.get('/payment/:id', authenticate, async (req, res) => {
 
 // Approve payment
 router.put('/payments/:id/approve', authenticate, async (req, res) => {
-
   try {
+    if (!req.params.id) {
+      return res.status(HttpStatus.BAD_REQUEST).send();
+    }
     const checkPayment = await Payment.findOne({ _id: req.params.id, status: { $ne: "approved" } })
     if (!checkPayment) {
-      return res.status(HttpStatus.NOT_FOUND).send();
+      return res.status(HttpStatus.NOT_FOUND).send({
+        code: "ERR_FINDING",
+        message: "Cannot find the payment that you have specified!"
+      });
     }
 
     if (checkPayment.status === "canceled") {
@@ -87,9 +92,15 @@ router.put('/payments/:id/approve', authenticate, async (req, res) => {
 // Cancel payment
 router.put('/payments/:id/cancel', async (req, res) => {
   try {
+    if (!req.params.id) {
+      return res.status(HttpStatus.BAD_REQUEST).send();
+    }
     const checkPayment = await Payment.findOne({ _id: req.params.id, status: { $ne: "canceled" } })
     if (!checkPayment) {
-      return res.status(HttpStatus.NOT_FOUND).send();
+      return res.status(HttpStatus.NOT_FOUND).send({
+        code: "ERR_FINDING",
+        message: "Cannot find the payment that you have specified!"
+      });
     }
 
     if (checkPayment.status === "approved") {

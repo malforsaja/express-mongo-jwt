@@ -49,7 +49,7 @@ router.post('/authenticate', async (req, res) => {
     res.send({ "authToken": token, "expiresIn": moment.unix(decoded.exp) })
   } catch (error) {
     //console.log(error);
-    res.status(HttpStatus.UNAUTHORIZED).send()
+    res.status(HttpStatus.UNAUTHORIZED).send({ code: "ERR_UNATHORIZED", message: "No auth token provided" })
   }
 })
 

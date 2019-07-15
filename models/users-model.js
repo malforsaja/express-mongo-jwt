@@ -55,6 +55,9 @@ const UserSchema = new mongoose.Schema({
 );
 
 UserSchema.statics.checkValidCredentials = async (username, password) => {
+  if (!username || !password) {
+    throw new Error('Please provide username and password!')
+  }
   const user = await User.findOne({ username })
 
   if (!user) {
