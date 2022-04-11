@@ -9,8 +9,8 @@
   "author": "malfor saja",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.0",
-    "body-parser": "^1.19.1",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
     "dotenv": "^8.6.0",
     "express": "^4.17.2",
     "http-status-codes": "^1.4.0",
