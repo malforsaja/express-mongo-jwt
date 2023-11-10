@@ -16,7 +16,7 @@
     "http-status-codes": "^1.4.0",
     "jsonwebtoken": "^9.0.2",
     "moment": "^2.29.4",
-    "mongoose": "^5.13.16",
+    "mongoose": "^5.13.21",
     "morgan": "^1.10.0",
     "uuid": "^3.4.0",
     "validator": "^13.11.0"
